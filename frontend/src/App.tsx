@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-import { sampleProducts } from "./data";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,22 +26,8 @@ function App() {
         </div>
       </header>
       <main className="">
-        <div className=" mt-4 px-8">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {sampleProducts.map((items) => {
-            return (
-              <div key={items.slug}>
-                <img
-                  className="product-image"
-                  src={items.image}
-                  alt={items.name}
-                />
-                <h2>{items.name}</h2>
-                <p className=" text-lg">${items.price}</p>
-              </div>
-            );
-          })}
-          </div>
+      <div className=" mt-4 px-8">
+          <Outlet />
           </div>
       </main>
 
