@@ -8,11 +8,15 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import HomePage from './pages/HomePage.tsx';
 import ProductPage from './pages/ProductPage.tsx';
 import axios from 'axios';
+import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-axios.defaults.baseURL=process.env.NODE_ENV==="development"?"http://localhost:4000":"/"
+
+// axios.defaults.baseURL=process.env.NODE_ENV==="development"?"http://localhost:4000":"/"
 
 
 const router = createBrowserRouter(
@@ -24,8 +28,16 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-   <RouterProvider router={router} />
-  </React.StrictMode>,
+    <HelmetProvider>
+    
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </HelmetProvider>
+  </React.StrictMode>
 )

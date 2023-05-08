@@ -1,5 +1,6 @@
 /build
 /node_modules
+.env
 # system files
 .DB_Store
 Thumbs.db
